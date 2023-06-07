@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] private Move move;
+    [SerializeField] private MoveObject move;
     public float timer;
     public bool isLaunched;
     public bool isSetUp;
@@ -22,7 +22,7 @@ public class Level : MonoBehaviour
     {
         if (isLaunched == false)
         {
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(0) && !UI_HoverTest.Ins.IsPointerOverUIElement())
             {
                 isLaunched = true;
             }
@@ -47,7 +47,7 @@ public class Level : MonoBehaviour
     public void EffectDestroy()
     {
         Cache.GetTransform(this.gameObject)
-            .DOLocalMove(Cache.GetTransform(this.gameObject).position - new Vector3(11, 0, 0), 1f, false)
+            .DOLocalMove(Cache.GetTransform(this.gameObject).position - new Vector3(15, 0, 0), 1f, false)
             .SetEase(Ease.InOutQuart)
             .OnComplete(() =>
             {
@@ -59,7 +59,7 @@ public class Level : MonoBehaviour
     public void EffectInstantiate()
     {
         Cache.GetTransform(this.gameObject)
-            .DOLocalMove(Cache.GetTransform(this.gameObject).position + new Vector3(11, 0, 0), 1f, false)
+            .DOLocalMove(Cache.GetTransform(this.gameObject).position + new Vector3(15, 0, 0), 1f, false)
             .SetEase(Ease.InOutQuart)
             .From()
             .OnComplete(() =>

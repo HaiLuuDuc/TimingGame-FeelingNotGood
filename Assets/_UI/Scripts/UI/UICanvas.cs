@@ -35,6 +35,9 @@ public class UICanvas : Singleton<UICanvas>
             m_RectTransform.offsetMin = leftBottom;
             m_OffsetY = 100f;
         }
+
+        m_RectTransform.anchoredPosition = Vector2.zero;
+        m_RectTransform.sizeDelta = Vector2.zero;
     }
 
     //Setup canvas to avoid flash UI

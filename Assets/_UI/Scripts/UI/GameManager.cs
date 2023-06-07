@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
 
         //ChangeState(GameState.MainMenu);
 
-        UIManager.Ins.OpenUI<MainMenu>();
+        UIManager.Ins.OpenUI<Loading>();
     }
 
 

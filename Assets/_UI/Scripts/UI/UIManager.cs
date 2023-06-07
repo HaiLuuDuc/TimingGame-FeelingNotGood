@@ -16,6 +16,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -50,6 +51,19 @@ public class UIManager : Singleton<UIManager>
 
         return canvas as T;
     }
+
+    public T OpenUIAfterSeconds<T>(float delayTime) where T : UICanvas
+    {
+        StartCoroutine(OpenUICoroutine<T>(delayTime));
+        return null;
+    }
+
+    public IEnumerator OpenUICoroutine<T>(float delayTime) where T : UICanvas
+    {
+        yield return new WaitForSeconds(delayTime);
+        OpenUI<T>();
+    }
+
 
     //close UI directly
     //dong UI canvas ngay lap tuc

@@ -1,3 +1,5 @@
+using DG.Tweening;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -62,6 +64,104 @@ public class UserInfoUI : MonoBehaviour
 
         minTotalTime.text = minuteString + ":" + secondString + ":" + milisecondString;
 
-
     }
+    
+   /* public void SwapImmediately()
+    {
+        int currentSiblingIndex = Cache.GetRectTransform(this.gameObject).GetSiblingIndex();
+        if (currentSiblingIndex == 0)
+        {
+            return;
+        }
+        else
+        {
+            int newSiblingIndex = currentSiblingIndex - 1;
+            UserInfoUI userInfoUI = Leaderboard.instance.userInfoUIs
+                .Find(userInfoUI => Cache.GetRectTransform(userInfoUI.gameObject).GetSiblingIndex() == newSiblingIndex);
+            RectTransform target = Cache.GetRectTransform(userInfoUI.gameObject);
+            Cache.GetRectTransform(this.gameObject)
+                .DOAnchorPos(target.anchoredPosition, 0.5f)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    Cache.GetRectTransform(this.gameObject).SetSiblingIndex(newSiblingIndex);
+                })
+                ;
+            Cache.GetRectTransform(userInfoUI.gameObject)
+                .DOAnchorPos(Cache.GetRectTransform(this.gameObject).anchoredPosition, 0.5f)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    Cache.GetRectTransform(userInfoUI.gameObject).SetSiblingIndex(currentSiblingIndex);
+                })
+                ;
+        }
+    }*/
+
+    public void SwapGradually()
+    {
+        int currentSiblingIndex = Cache.GetRectTransform(this.gameObject).GetSiblingIndex();
+        if (currentSiblingIndex == 0)
+        {
+            return;
+        }
+        else
+        {
+            int newSiblingIndex = currentSiblingIndex - 1;
+            UserInfoUI userInfoUI = Leaderboard.instance.userInfoUIs
+                .Find(userInfoUI => Cache.GetRectTransform(userInfoUI.gameObject).GetSiblingIndex() == newSiblingIndex);
+            RectTransform target = Cache.GetRectTransform(userInfoUI.gameObject);
+            Cache.GetRectTransform(this.gameObject)
+                .DOAnchorPos(target.anchoredPosition, 0.5f)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    Cache.GetRectTransform(this.gameObject).SetSiblingIndex(newSiblingIndex);
+                })
+                ;
+            Cache.GetRectTransform(userInfoUI.gameObject)
+                .DOAnchorPos(Cache.GetRectTransform(this.gameObject).anchoredPosition, 0.5f)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    Cache.GetRectTransform(userInfoUI.gameObject).SetSiblingIndex(currentSiblingIndex);
+                })
+                ;
+        }
+    }
+
+
+
+    /*public void MoveDown()
+    {
+        currentSiblingIndex = Cache.GetRectTransform(this.gameObject).GetSiblingIndex();
+        if (currentSiblingIndex == Leaderboard.instance.userInfoUIs.Count-1)
+        {
+            return;
+        }
+        else
+        {
+            int newSiblingIndex = currentSiblingIndex + 1;
+            UserInfoUI userInfoUI = Leaderboard.instance.userInfoUIs
+                .Find(userInfoUI => Cache.GetRectTransform(userInfoUI.gameObject).GetSiblingIndex() == newSiblingIndex);
+            RectTransform target = Cache.GetRectTransform(userInfoUI.gameObject);
+            Cache.GetRectTransform(this.gameObject)
+                .DOAnchorPos(target.anchoredPosition, 0.5f)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    Cache.GetRectTransform(this.gameObject).SetSiblingIndex(newSiblingIndex);
+                })
+                ;
+            Cache.GetRectTransform(userInfoUI.gameObject)
+                .DOAnchorPos(Cache.GetRectTransform(this.gameObject).anchoredPosition, 0.5f)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    Cache.GetRectTransform(userInfoUI.gameObject).SetSiblingIndex(currentSiblingIndex);
+                })
+                ;
+        }
+    }*/
+
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
@@ -42,11 +41,12 @@ public class LevelManager : Singleton<LevelManager>
 
     public IEnumerator LoadNextLevelCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
         if (currentLevelIndex < levels.Length - 1)
         {
             currentLevelIndex++;
             LoadLevel(currentLevelIndex);
+            Gameplay.instance.OnWin();
         }
         else
         {

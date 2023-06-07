@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -90,5 +90,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4064176878903057405}
   winDot: {fileID: 21300000, guid: 4dab14db5b183c0428cbcb7ebabe0c4c, type: 3}
-  loseDot: {fileID: 21300000, guid: d77306d3b6d3d6a49be61237baafbe04, type: 3}
+  progressDot: {fileID: 0}
   initialDot: {fileID: 21300000, guid: 6652fe7d38bf95144b1fe8d696e153ff, type: 3}

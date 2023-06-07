@@ -10,24 +10,11 @@ public class LoadingBar : MonoBehaviour
     private float initialWidth;
     private float initialHeight;
 
+
     private void Start()
     {
         SetUp();
-        StartCoroutine(Loading());
-    }
-
-    public IEnumerator Loading()
-    {
-        while (yellowBar.sizeDelta.x < initialWidth)
-        {
-            Vector2 targetSizeDelta = new Vector2(yellowBar.sizeDelta.x + step, initialHeight);
-            yellowBar.sizeDelta = targetSizeDelta;
-            yield return null;
-        }
-        UIManager.Ins.CloseUI<Loading>();
-        UIManager.Ins.OpenUI<MainMenu>();
-        
-        yield return null;
+        StartCoroutine(LoadingCoroutine());
     }
 
     public void SetUp()
@@ -36,4 +23,28 @@ public class LoadingBar : MonoBehaviour
         initialHeight = yellowBar.sizeDelta.y;
         yellowBar.sizeDelta = new Vector2(0, initialHeight);
     }
+
+    public IEnumerator LoadingCoroutine()
+    {
+        while (yellowBar.sizeDelta.x < initialWidth)
+        {
+            //scale
+            Vector2 targetSizeDelta = new Vector2(yellowBar.sizeDelta.x + step*Time.deltaTime, initialHeight);
+            yellowBar.sizeDelta = targetSizeDelta;
+
+            //position
+            float xOffset = (yellowBar.sizeDelta.x / initialWidth) / 2 * initialWidth ;
+            float newX = (whiteBar.localPosition.x - initialWidth / 2) + xOffset;
+            yellowBar.localPosition = new Vector2(newX, yellowBar.localPosition.y);
+
+            yield return null;
+        }
+
+        UIManager.Ins.CloseUI<Loading>();
+        UIManager.Ins.OpenUI<MainMenu>();
+        
+        yield return null;
+    }
+
+    
 }

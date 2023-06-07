@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum CountryType
@@ -19,19 +20,19 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
     [Header("Country:")]
     public Sprite[] countries;
     [Header("User:")]
-    public List<UserInfo> userInfos; 
+    public List<UserInfo> userInfos;
+
 
     private void Start()
     {
         userInfos = new List<UserInfo>
         {
-            new UserInfo (0, CountryType.Canada, "Player", 0, 0f ),
-            new UserInfo (1, (CountryType)Random.Range(0,countries.Length), "Fake User 1", 1, 150.2f),
-            new UserInfo (2, (CountryType)Random.Range(0, countries.Length), "Fake User 2", 3, 135.6f),
-            new UserInfo (3, (CountryType)Random.Range(0, countries.Length), "Fake User 3", 7, 135.7f),
-            new UserInfo (4, (CountryType)Random.Range(0, countries.Length), "Fake User 4", 8, 180.9f)
+            new UserInfo (0, CountryType.Canada, "Player", maxPassedLevel, minTotalTime<9999?minTotalTime:0),
+            new UserInfo (1, CountryType.China, "Shou Zhen", 1, 150.2f),
+            new UserInfo (2, CountryType.USA, "Mike", 3, 135.6f),
+            new UserInfo (3, CountryType.Belgium, "Bruyne", 7, 135.7f),
+            new UserInfo (4, CountryType.USA, "Jack", 8, 180.9f)
         };
-
         SortLeaderboard();
     }
 
@@ -46,8 +47,9 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
     }
 
    
-    public void OnSkip()
+    public void OnSkip() // co cong thoi gian vao minTotalTime k?
     {
+        Debug.Log("co cong thoi gian vao minTotalTime k?");
         UpdateMinTotalTime();
         UpdateCurrentPassedLevel();
         UpdateMaxPassedLevel();
@@ -71,6 +73,7 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
         {
             minTotalTime = currentTotalTime < minTotalTime ? currentTotalTime : minTotalTime;
         }
+        SaveMinTotalTime();
     }
 
     public void ResetCurrentTotalTime()
@@ -87,6 +90,7 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
     public void UpdateMaxPassedLevel()
     {
         maxPassedLevel = currentPassedLevel > maxPassedLevel ? currentPassedLevel : maxPassedLevel;
+        SaveMaxPassedLevel();
     }
 
     public void ResetCurrentPassedLevel()
@@ -115,6 +119,7 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
             }
         });
         UpdateRank();
+        SaveNewSiblingIndexs();
     }
 
     private void UpdateRank()
@@ -136,7 +141,25 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
     {
         UserInfo userInfo = userInfos.Find(userInfo => userInfo.name == userName);
         userInfo.UpdateInfo(passedLevel, minTotalTime);
-        UpdateRank();
+    }
+
+    public void SaveMaxPassedLevel()
+    {
+        DataManager.ins.playerData.maxPassedLevel = this.maxPassedLevel;
+    }
+
+    public void SaveMinTotalTime()
+    {
+        DataManager.ins.playerData.minTotalTime = this.minTotalTime;
+    }
+
+    public void SaveNewSiblingIndexs() {
+        for(int i=0;i<userInfos.Count; i++)
+        {
+            int index = i;
+            UserInfo userInfo = userInfos.Find(x => x.id == index);
+            DataManager.ins.playerData.newSiblingIndexs[i] = userInfos.IndexOf(userInfo);
+        }
     }
 
 }

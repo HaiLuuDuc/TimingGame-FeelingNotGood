@@ -1,0 +1,20 @@
+Cry.png
+size:392,299
+filter:Linear,Linear
+pma:true
+Layer 14
+bounds:2,2,295,295
+Layer 15
+bounds:299,136,161,81
+rotate:90
+Layer 16
+bounds:299,11,123,34
+rotate:90
+Layer 19
+bounds:335,65,69,39
+rotate:90
+Layer 20
+bounds:335,2,61,41
+rotate:90
+Layer 21
+bounds:376,119,14,15

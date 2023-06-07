@@ -1,0 +1,16 @@
+Smile.png
+size:448,305
+filter:Linear,Linear
+pma:true
+Layer 11
+bounds:2,8,295,295
+Layer 12
+bounds:413,224,79,33
+rotate:90
+Layer 12 copy
+bounds:299,65,124,112
+Layer 12 copy 2
+bounds:299,179,124,112
+rotate:90
+Layer 12 copy 3
+bounds:299,2,132,61
